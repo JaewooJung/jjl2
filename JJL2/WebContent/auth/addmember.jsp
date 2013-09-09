@@ -8,9 +8,9 @@
     pageEncoding="UTF-8"%>
 <jsp:useBean id="member" class="net.bitacademy.java41.vo.Member" 
 		scope="session"></jsp:useBean>   
-<jsp:useBean id="project" type="java.util.Collection<net.bitacademy.java41.vo.Project>" 
-		scope="session"></jsp:useBean>  
 <jsp:useBean id="member_project" type="java.util.Collection<net.bitacademy.java41.vo.Project>" 
+		scope="session"></jsp:useBean>  
+<jsp:useBean id="allmember" type="java.util.List<net.bitacademy.java41.vo.Member>" 
 		scope="session"></jsp:useBean>  
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -100,14 +100,15 @@
     
 
 
-<jsp:include page="sidebar.jsp"></jsp:include>
+ <jsp:include page="sidebar.jsp"></jsp:include>
     
     <div class="content">
         
         <div class="header">
             
-            <h1 class="page-title">All Projects</h1>
+            <h1 class="page-title">회원 추가 </h1>
         </div>
+       
         
             <!-- <li><a href="index.html">Home</a> <span class="divider">/</span></li> 
             <li class="active">Users</li>
@@ -124,42 +125,32 @@
   </div>
 </div>-->
 <div class="well">
-    <table class="table" >
-      <thead >
-        <tr>
-          <th>Project No </th>
-          <th>Title </th>
-          <th>StartDate </th>
-          <th>EndDate </th>
-          <th>Tag  </th>
-          <th>Details  </th>
-          <th style="width: 20px;"></th>
-        </tr>
-      </thead>
-      
-      
-      <tbody>
-       
-       <% for(Project p : project){%>
-       <tr>
-          <td><%=p.getPno()%></td>
-          <td><%=p.getTitle()%></td>
-          <td><%=p.getStartDate()%></td>
-          <td><%=p.getEndDate()%></td>
-          <td><%=p.getTag()%></td>
-          <td><a href="../auth/projectdetail?pno=<%=p.getPno()%>"><i class="icon-pencil"></i></a></td>
-          <td>
-           <!--    <a href="user.html"><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-           --></td>
-        </tr>
-       
-       <%} %>
-       </tbody>
-    </table>
+ <form action="addmember" method="post">
+<label>*이메일</label>
+<input type="text" name="email"><br>
+<label>*암호</label>
+<input type="password" name="password"><br>
+<label>*암호 확인</label>
+<input type="password" name="password2"><br>
+<label>*이름</label>
+<input type="text" name="name"><br>
+<label>*전화</label>
+<input type="text" name="tel"><br>
+<label>블로그</label>
+<input type="text" name="blog"><br>
+<label>우편번호</label>
+<input type="text" name="postno">
+<input type="button" class="btn btn-primary pull-right" value="우편번호찾기"><br>
+<label>기본주소</label>
+<input type="text" name="basicAddr"><br>
+<label>상세주소</label>
+<input type="text" name="detailAddr"><br>
+<label>태그</label>
+<input type="text" name="tag"><br>
 
-
-
+<input type="submit" class="btn btn-primary pull-right" value="회원가입">
+<input type="reset" class="btn btn-primary pull-right" value="취소">
+</form>
 </div>
 
 <!-- 

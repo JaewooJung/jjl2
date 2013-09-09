@@ -58,20 +58,6 @@
   <body class=""> 
   <!--<![endif]-->
     
-    <div class="navbar">
-        <div class="navbar-inner">
-                <ul class="nav pull-right">
-                    
-                </ul>
-                <a class="brand" href="../auth/main"><span class="first">JJL</span> <span class="second">Project</span></a>
-        </div>
-    </div>
-    
-
-
-    
-
-    
         <div class="row-fluid">
     <div class="dialog">
         <div class="block">

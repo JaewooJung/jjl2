@@ -25,7 +25,7 @@ public class MemberDao {
 		try {
 			con = conPool.getConnection();
 			stmt = con.prepareStatement(
-				"select EMAIL,MNAME,TEL from SPMS_MEMBS "
+				"select EMAIL,MNAME,TEL, LEVEL from SPMS_MEMBS "
 				+ " where EMAIL=? and PWD=?"); // ? -> in-parameter
 			stmt.setString(1, email);
 			stmt.setString(2, password);
@@ -36,7 +36,7 @@ public class MemberDao {
 				member.setEmail(rs.getString("EMAIL"));
 				member.setName(rs.getString("MNAME"));
 				member.setTel(rs.getString("TEL"));
-				
+				member.setLevel(rs.getInt("LEVEL"));
 				return member;
 				
 			} else {
@@ -84,7 +84,7 @@ public class MemberDao {
 			}
 		}
 	}
-/*
+
 	public List<Member> list() throws Exception {
 		Connection con = null;
 		Statement stmt = null;
@@ -96,14 +96,20 @@ public class MemberDao {
 			con = conPool.getConnection();
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(
-					"select MNAME,PHONE,EMAIL from MEMBERS order by MNAME");
+					"select * from SPMS_MEMBS order by MNAME");
 			
 			Member m = null;
 			while(rs.next()) {
 				m = new Member();
-				m.setName(rs.getString("MNAME"));
-				m.setPhone(rs.getString("PHONE"));
 				m.setEmail(rs.getString("EMAIL"));
+				m.setName(rs.getString("MNAME"));
+				m.setPassword(rs.getString("PWD"));
+				m.setTel(rs.getString("TEL"));
+				m.setBlog(rs.getString("BLOG"));
+				m.setRegDate(rs.getDate("REG_DATE"));
+				m.setUpdateDate(rs.getDate("UPDATE_DATE"));
+				m.setDetailAddress(rs.getString("DET_ADDR"));
+				m.setTag(rs.getString("TAG"));
 				list.add(m);
 			}
 			
@@ -132,19 +138,22 @@ public class MemberDao {
 			stmt = con.createStatement();
 			
 			rs = stmt.executeQuery(
-					"select MNAME,PHONE,EMAIL,BLOG,AGE,REG_DATE"
-					+ " from MEMBERS"
+					"select * "
+					+ " from SPMS_MEMBS"
 					+ " where EMAIL='" + email + "'");
 			
 			if (rs.next()) {
-				Member member = new Member();
-				member.setName(rs.getString("MNAME"));
-				member.setPhone(rs.getString("PHONE"));
-				member.setEmail(rs.getString("EMAIL"));
-				member.setBlog(rs.getString("BLOG"));
-				member.setAge(rs.getInt("AGE"));
-				member.setRegDate(rs.getDate("REG_DATE"));
-				return member;
+				Member m = new Member();
+				m.setEmail(rs.getString("EMAIL"));
+				m.setName(rs.getString("MNAME"));
+				m.setPassword(rs.getString("PWD"));
+				m.setTel(rs.getString("TEL"));
+				m.setBlog(rs.getString("BLOG"));
+				m.setRegDate(rs.getDate("REG_DATE"));
+				m.setUpdateDate(rs.getDate("UPDATE_DATE"));
+				m.setDetailAddress(rs.getString("DET_ADDR"));
+				m.setTag(rs.getString("TAG"));
+				return m;
 				
 			} else {
 				return null;
@@ -160,7 +169,7 @@ public class MemberDao {
 			}
 		}
 	}
-
+/*
 	public int change(Member member) throws Exception {
 		Connection con = null;
 		PreparedStatement stmt = null;

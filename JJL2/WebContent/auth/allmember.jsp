@@ -8,9 +8,9 @@
     pageEncoding="UTF-8"%>
 <jsp:useBean id="member" class="net.bitacademy.java41.vo.Member" 
 		scope="session"></jsp:useBean>   
-<jsp:useBean id="project" type="java.util.Collection<net.bitacademy.java41.vo.Project>" 
-		scope="session"></jsp:useBean>  
 <jsp:useBean id="member_project" type="java.util.Collection<net.bitacademy.java41.vo.Project>" 
+		scope="session"></jsp:useBean>  
+<jsp:useBean id="allmember" type="java.util.List<net.bitacademy.java41.vo.Member>" 
 		scope="session"></jsp:useBean>  
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -100,14 +100,15 @@
     
 
 
-<jsp:include page="sidebar.jsp"></jsp:include>
+ <jsp:include page="sidebar.jsp"></jsp:include>
     
     <div class="content">
         
         <div class="header">
             
-            <h1 class="page-title">All Projects</h1>
+            <h1 class="page-title">회원 관리 </h1>
         </div>
+        <p align="right" style="pitch: medium;"><a href="<%=application.getContextPath()%>/auth/addmember" >멤버 추가</a></p>
         
             <!-- <li><a href="index.html">Home</a> <span class="divider">/</span></li> 
             <li class="active">Users</li>
@@ -127,27 +128,23 @@
     <table class="table" >
       <thead >
         <tr>
-          <th>Project No </th>
-          <th>Title </th>
-          <th>StartDate </th>
-          <th>EndDate </th>
-          <th>Tag  </th>
-          <th>Details  </th>
-          <th style="width: 20px;"></th>
+          <th>Email </th>
+          <th>Name </th>
+          <th>Tel </th>
+          <th>Blog </th>
+          <th style="width: 20px;">Detail</th>
         </tr>
       </thead>
       
-      
       <tbody>
        
-       <% for(Project p : project){%>
+       <% for(Member m : allmember){%>
        <tr>
-          <td><%=p.getPno()%></td>
-          <td><%=p.getTitle()%></td>
-          <td><%=p.getStartDate()%></td>
-          <td><%=p.getEndDate()%></td>
-          <td><%=p.getTag()%></td>
-          <td><a href="../auth/projectdetail?pno=<%=p.getPno()%>"><i class="icon-pencil"></i></a></td>
+          <td><%=m.getEmail()%></td>
+          <td><%=m.getName()%></td>
+          <td><%=m.getTel()%></td>
+          <td><%=m.getBlog()%></td>
+          <td><a href="../auth/memberdetail?email=<%=m.getEmail()%>"><i class="icon-pencil"></i></a></td>
           <td>
            <!--    <a href="user.html"><i class="icon-pencil"></i></a>
               <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
@@ -157,9 +154,6 @@
        <%} %>
        </tbody>
     </table>
-
-
-
 </div>
 
 <!-- 
