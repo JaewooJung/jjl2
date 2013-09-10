@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.bitacademy.java41.dao.MemberDao;
+import net.bitacademy.java41.vo.Member;
 
 @WebServlet("/auth/passwordreset")
 @SuppressWarnings("serial")
@@ -32,8 +33,8 @@ public class PasswordChangeServlet extends HttpServlet {
 		
 		try {
 			request.setCharacterEncoding("UTF-8");
-			
-			String email = request.getParameter("email");
+			Member member = (Member) request.getSession().getAttribute("memberUpdate");
+			String email = member.getEmail();
 			String oldPassword = request.getParameter("password");
 			String newPassword = request.getParameter("newPassword");
 			String newPassword2 = request.getParameter("newPassword2");
@@ -49,7 +50,7 @@ public class PasswordChangeServlet extends HttpServlet {
 			}
 			
 			RequestDispatcher rd = 
-					request.getRequestDispatcher("/member/passwordChangeResult.jsp");
+					request.getRequestDispatcher("/auth/passwordChangeResult.jsp");
 			rd.forward(request, response);
 			
 		} catch (Exception e) {
