@@ -57,7 +57,12 @@ public class MemberUpdateServlet extends HttpServlet {
 		
 		MemberDao memberDao = 
 				(MemberDao) this.getServletContext().getAttribute("memberDao");
+		
+		
 		try {
+			Member member = (Member) request.getSession().getAttribute("memberUpdate");
+			if(request.getParameter("password").equals(member.getPassword())){
+			
 			Member memberUpdate = (Member) request.getSession().getAttribute("memberUpdate");
 			memberUpdate.setName(request.getParameter("name"))
 			.setPassword(memberUpdate.getEmail())
@@ -73,7 +78,12 @@ public class MemberUpdateServlet extends HttpServlet {
 			response.sendRedirect("../auth/allmember");
 			//RequestDispatcher rd = request.getRequestDispatcher("../auth/allmember");
 			//rd.forward(request, response);
-			
+			}else{
+				RequestDispatcher rd = 
+						request.getRequestDispatcher("/auth/update_error.jsp");
+				rd.forward(request, response);
+				
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			RequestDispatcher rd = 
