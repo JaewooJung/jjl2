@@ -104,8 +104,7 @@
 <%=memberUpdate.getEmail() %>
 <label>*암호</label>
 <input type="password" name="password"><br>
-<label>*암호 확인</label>
-<input type="password" name="password2"><br>
+<p><a href="../auth/passwordreset" class="btn btn-primary" >암호 재설정<br></a></p>
 <label>*이름</label>
 <input type="text" name="name" value = "<%=memberUpdate.getName() %>"><br>
 <label>*전화</label>
@@ -121,6 +120,13 @@
 <input type="text" name="detailAddr" value = "<%=memberUpdate.getDetailAddress()%>"><br>
 <label>태그</label>
 <input type="text" name="tag" value = "<%=memberUpdate.getTag() %>"><br>
+<label>멤버권한</label>
+<select name="level">
+<option value="0" <%if(memberUpdate.getLevel() == 0){out.println("selected");} %>>일반회원</option>
+<option value="1" <%if(memberUpdate.getLevel() == 1){out.println("selected");} %>>관리자</option>
+<option value="2" <%if(memberUpdate.getLevel() == 2){out.println("selected");} %>>PM</option>
+<option value="9" <%if(memberUpdate.getLevel() == 9){out.println("selected");} %>>손님</option>
+</select><br>
 <input type="reset" class="btn btn-primary pull-right" value="취소">
 <input type="submit" class="btn btn-primary pull-right" value="업데이트">
 

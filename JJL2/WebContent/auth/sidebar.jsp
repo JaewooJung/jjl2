@@ -18,7 +18,7 @@
               <thead>
                 <tr>
                   <th><span class="label label-info">Name</span></th>
-                  <th>${member.name}</th>
+                  <th><a href="../auth/mymemberupdate">${member.name}</a></th>
                 </tr>
               </thead>
               <tbody>
