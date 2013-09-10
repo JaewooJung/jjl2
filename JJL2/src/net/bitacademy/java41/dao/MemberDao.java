@@ -169,7 +169,7 @@ public class MemberDao {
 			}
 		}
 	}
-/*
+
 	public int change(Member member) throws Exception {
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -177,14 +177,16 @@ public class MemberDao {
 		try {
 			con = conPool.getConnection();
 			stmt = con.prepareStatement(
-				"update MEMBERS set"
-				+ " MNAME=?,PHONE=?,BLOG=?,AGE=?,REG_DATE=now()"
+				"update SPMS_MEMBS set"
+				+ " MNAME=?,PWD=?,TEL=?,BLOG=?,UPDATE_DATE=now(), DET_ADDR = ?, TAG=?"
 				+ " where EMAIL=?");
 			stmt.setString(1, member.getName());
-			stmt.setString(2, member.getPhone());
-			stmt.setString(3, member.getBlog());
-			stmt.setInt(4, member.getAge());
-			stmt.setString(5, member.getEmail());
+			stmt.setString(2, member.getPassword());
+			stmt.setString(3, member.getTel());
+			stmt.setString(4, member.getBlog());
+			stmt.setString(5, member.getDetailAddress());
+			stmt.setString(6, member.getTag());			
+			stmt.setString(7, member.getEmail());
 			return stmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -207,7 +209,7 @@ public class MemberDao {
 			stmt = con.createStatement();
 			
 			return stmt.executeUpdate(
-				"delete from MEMBERS"
+				"delete from SPMS_MEMBS"
 				+ " where EMAIL='" + email + "'");
 			
 		} catch (Exception e) {
@@ -220,7 +222,7 @@ public class MemberDao {
 			}
 		}
 	}
-*/
+
 }
 
 

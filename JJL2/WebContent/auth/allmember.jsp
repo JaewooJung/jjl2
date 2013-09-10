@@ -125,6 +125,16 @@
   </div>
 </div>-->
 <div class="well">
+
+<script language="javascript">
+function confirmDelete(id){
+var ans = confirm(id + "의 정보를 삭제 하시겠습니까?");
+if(ans == "1"){
+document.location = "../auth/deletemember?email="+ id;
+}
+}	
+</script>
+
     <table class="table" >
       <thead >
         <tr>
@@ -132,7 +142,8 @@
           <th>Name </th>
           <th>Tel </th>
           <th>Blog </th>
-          <th style="width: 20px;">Detail</th>
+          <th style="width: 20px;"></th>
+          <th></th>
         </tr>
       </thead>
       
@@ -140,15 +151,16 @@
        
        <% for(Member m : allmember){%>
        <tr>
-          <td><%=m.getEmail()%></td>
+          <td><a href="../auth/memberdetail?email=<%=m.getEmail()%>"><%=m.getEmail()%></a></td>
           <td><%=m.getName()%></td>
           <td><%=m.getTel()%></td>
           <td><%=m.getBlog()%></td>
-          <td><a href="../auth/memberdetail?email=<%=m.getEmail()%>"><i class="icon-pencil"></i></a></td>
+          
+          <td><a href="../auth/memberupdate?email=<%=m.getEmail()%>"><i class="icon-pencil"></i></a></td>
           <td>
-           <!--    <a href="user.html"><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-           --></td>
+              <a href="javascript:confirmDelete('<%=m.getEmail()%>');"><i class="icon-remove"></i></a>
+          </td>
+        	
         </tr>
        
        <%} %>

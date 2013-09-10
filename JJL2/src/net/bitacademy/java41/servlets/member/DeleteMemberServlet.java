@@ -1,4 +1,4 @@
-package net.bitacademy.java41.servlets;
+package net.bitacademy.java41.servlets.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,9 +18,9 @@ import net.bitacademy.java41.dao.ProjectDao;
 import net.bitacademy.java41.vo.Member;
 import net.bitacademy.java41.vo.Project;
 
-@WebServlet("/auth/memberdetail")
+@WebServlet("/auth/deletemember")
 @SuppressWarnings("serial")
-public class MemberDetailServlet extends HttpServlet {
+public class DeleteMemberServlet extends HttpServlet {
 	@Override
 	protected void doGet(
 			HttpServletRequest request, HttpServletResponse response)
@@ -32,21 +32,11 @@ public class MemberDetailServlet extends HttpServlet {
 				(MemberDao) this.getServletContext().getAttribute("memberDao");
 		try {
 			
-			Member member = memberDao.get(request.getParameter("email"));
+			memberDao.remove(request.getParameter("email"));
 			HttpSession session = request.getSession();
+			RequestDispatcher rd = request.getRequestDispatcher("../auth/allmember");
+			rd.forward(request, response);
 			
-			if (member != null) {
-				RequestDispatcher rd = request.getRequestDispatcher("../auth/memberdetail.jsp");
-				session.setAttribute("memberdetail", member);
-				rd.forward(request, response);
-			
-			} else {
-				session.invalidate();
-				RequestDispatcher rd = 
-						request.getRequestDispatcher("/auth/error.jsp");
-				rd.forward(request, response);
-			}
-	
 		} catch (Exception e) {
 			e.printStackTrace();
 			RequestDispatcher rd = 

@@ -1,4 +1,4 @@
-package net.bitacademy.java41.servlets;
+package net.bitacademy.java41.servlets.project;
 
 import java.io.IOException;
 import java.io.PrintWriter;

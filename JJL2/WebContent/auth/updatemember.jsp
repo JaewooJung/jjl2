@@ -12,6 +12,8 @@
 		scope="session"></jsp:useBean>  
 <jsp:useBean id="allmember" type="java.util.List<net.bitacademy.java41.vo.Member>" 
 		scope="session"></jsp:useBean>  
+<jsp:useBean id="memberUpdate" type="net.bitacademy.java41.vo.Member" 
+		scope="session"></jsp:useBean>  
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -125,30 +127,30 @@
   </div>
 </div>-->
 <div class="well">
- <form action="addmember" method="post">
+ <form action="memberupdate" method="post">
 <label>*이메일</label>
-<input type="text" name="email"><br>
+<%=memberUpdate.getEmail() %>
 <label>*암호</label>
 <input type="password" name="password"><br>
 <label>*암호 확인</label>
 <input type="password" name="password2"><br>
 <label>*이름</label>
-<input type="text" name="name"><br>
+<input type="text" name="name" value = "<%=memberUpdate.getName() %>"><br>
 <label>*전화</label>
-<input type="text" name="tel"><br>
+<input type="text" name="tel" value = "<%=memberUpdate.getTel() %>"><br>
 <label>블로그</label>
-<input type="text" name="blog"><br>
+<input type="text" name="blog" value = "<%=memberUpdate.getBlog() %>"><br>
 <label>우편번호</label>
-<input type="text" name="postno">
+<input type="text" name="postno"  value = "<%=memberUpdate.getAddressNo()%>">
 <p><input type="button" class="btn btn-primary" value="우편번호찾기"><br></p>
 <label>기본주소</label>
-<input type="text" name="basicAddr"><br>
+<input type="text" name="basicAddr" value = "<%=memberUpdate.getDetailAddress()%>"><br>
 <label>상세주소</label>
-<input type="text" name="detailAddr"><br>
+<input type="text" name="detailAddr" value = "<%=memberUpdate.getDetailAddress()%>"><br>
 <label>태그</label>
-<input type="text" name="tag"><br>
+<input type="text" name="tag" value = "<%=memberUpdate.getTag() %>"><br>
 <input type="reset" class="btn btn-primary pull-right" value="취소">
-<input type="submit" class="btn btn-primary pull-right" value="회원추가">
+<input type="submit" class="btn btn-primary pull-right" value="업데이트">
 
 </form>
 </div>

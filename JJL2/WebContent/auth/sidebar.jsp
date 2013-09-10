@@ -59,11 +59,11 @@
  -->
         <a href="../auth/allproject" class="nav-header"><i class="icon-legal"></i>View All Projects</a>
         <%if(member.getLevel() == 1){ %>
-        <a href="#legal-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>회원관리 </a>
+        <a href="#legal-menu" class="nav-header" data-toggle="collapse"><i class="icon-user"></i>Manager</a>
         <ul id="legal-menu" class="nav nav-list collapse">
             
-            <li ><a href="../auth/allmember">회원 관리 </a></li>
-            <li ><a href="../auth/projectdetail">프로젝트 관리 </a></li>
+            <li ><a href="../auth/allmember">Member Control </a></li>
+            <li ><a href="../auth/projectdetail">Project Control </a></li>
         </ul>
         <%}else{ %>
         <a href="#legal-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>Project<span class="label label-info"><%=member_project.size() %></span></a>
