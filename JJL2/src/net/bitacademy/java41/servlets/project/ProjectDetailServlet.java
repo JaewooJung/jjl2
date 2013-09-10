@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.dao.ProjectDao;
 import net.bitacademy.java41.vo.Member;
 import net.bitacademy.java41.vo.Project;
@@ -29,7 +30,8 @@ public class ProjectDetailServlet extends HttpServlet {
 			throws ServletException, IOException {
 		ProjectDao projectDao = 
 				(ProjectDao) this.getServletContext().getAttribute("projectDao");
-		
+		MemberDao memberDao = 
+				(MemberDao) this.getServletContext().getAttribute("memberDao");
 		
 		
 		try {
@@ -39,6 +41,7 @@ public class ProjectDetailServlet extends HttpServlet {
 			Project project = projectDao.getProject(Integer.parseInt(pno));
 			RequestDispatcher rd = request.getRequestDispatcher("projectdetail.jsp");
 			session.setAttribute("project_detail", project);
+			session.setAttribute("project_detail_members", memberDao.get(request.getParameter("pno")));
 			rd.forward(request, response);
 			
 		} catch (Exception e) {

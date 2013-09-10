@@ -63,8 +63,8 @@ public class MemberDao {
 			stmt = con.prepareStatement(
 				"insert into SPMS_MEMBS("
 				+ " EMAIL,MNAME,PWD,TEL,"
-				+ " BLOG,REG_DATE,UPDATE_DATE,DET_ADDR,TAG)"
-				+ " values(?,?,?,?,?,now(),now(),?,?)");
+				+ " BLOG,REG_DATE,UPDATE_DATE,DET_ADDR,TAG, LEVEL)"
+				+ " values(?,?,?,?,?,now(),now(),?,?,?)");
 			stmt.setString(1, member.getEmail());
 			stmt.setString(2, member.getName());
 			stmt.setString(3, member.getPassword());
@@ -72,6 +72,7 @@ public class MemberDao {
 			stmt.setString(5, member.getBlog());
 			stmt.setString(6, member.getDetailAddress());
 			stmt.setString(7, member.getTag());
+			stmt.setInt(8, member.getLevel());
 			return stmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -110,6 +111,7 @@ public class MemberDao {
 				m.setUpdateDate(rs.getDate("UPDATE_DATE"));
 				m.setDetailAddress(rs.getString("DET_ADDR"));
 				m.setTag(rs.getString("TAG"));
+				m.setLevel(rs.getInt("LEVEL"));
 				list.add(m);
 			}
 			
@@ -153,6 +155,7 @@ public class MemberDao {
 				m.setUpdateDate(rs.getDate("UPDATE_DATE"));
 				m.setDetailAddress(rs.getString("DET_ADDR"));
 				m.setTag(rs.getString("TAG"));
+				m.setLevel(rs.getInt("LEVEL"));
 				return m;
 				
 			} else {
@@ -169,6 +172,48 @@ public class MemberDao {
 			}
 		}
 	}
+	
+	public List<Member> get(int pno) throws Exception {
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = conPool.getConnection();
+			stmt = con.createStatement();
+			
+			rs = stmt.executeQuery(
+					"select t1.LEVEL, t2.EMAIL, t2.MNAME, t2.PWD, t2.REG_DATE, t2.TAG, t2.TEL, t2.UPDATE_DATE from SPMS_PRJMEMB t1, SPMS_MEMBS t2 where t1.EMAIL = t2.EMAIL and t1.PNO = " + pno + " order by pno");
+			ArrayList<Member> list = new ArrayList<Member>(); 
+			Member m = null;
+			while (rs.next()) {
+				m = new Member();
+				m.setEmail(rs.getString("EMAIL"));
+				m.setName(rs.getString("MNAME"));
+				m.setPassword(rs.getString("PWD"));
+				m.setTel(rs.getString("TEL"));
+				m.setBlog(rs.getString("BLOG"));
+				m.setRegDate(rs.getDate("REG_DATE"));
+				m.setUpdateDate(rs.getDate("UPDATE_DATE"));
+				m.setDetailAddress(rs.getString("DET_ADDR"));
+				m.setTag(rs.getString("TAG"));
+				m.setLevel(rs.getInt("LEVEL"));
+				list.add(m);
+			}
+			return list;
+			
+		} catch (Exception e) {
+			throw e;
+			
+		} finally {
+			try {rs.close();} catch (Exception e) {}
+			try {stmt.close();} catch (Exception e) {}
+			if (con != null) {
+				conPool.returnConnection(con);
+			}
+		}
+	}
+	
 
 	public int change(Member member) throws Exception {
 		Connection con = null;
@@ -178,7 +223,7 @@ public class MemberDao {
 			con = conPool.getConnection();
 			stmt = con.prepareStatement(
 				"update SPMS_MEMBS set"
-				+ " MNAME=?,PWD=?,TEL=?,BLOG=?,UPDATE_DATE=now(), DET_ADDR = ?, TAG=?"
+				+ " MNAME=?,PWD=?,TEL=?,BLOG=?,UPDATE_DATE=now(), DET_ADDR = ?, TAG=?, LEVEL=?"
 				+ " where EMAIL=?");
 			stmt.setString(1, member.getName());
 			stmt.setString(2, member.getPassword());
@@ -186,7 +231,8 @@ public class MemberDao {
 			stmt.setString(4, member.getBlog());
 			stmt.setString(5, member.getDetailAddress());
 			stmt.setString(6, member.getTag());			
-			stmt.setString(7, member.getEmail());
+			stmt.setInt(7, member.getLevel());
+			stmt.setString(8, member.getEmail());
 			return stmt.executeUpdate();
 
 		} catch (Exception e) {

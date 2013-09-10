@@ -65,7 +65,8 @@ public class MemberUpdateServlet extends HttpServlet {
 			.setTel(request.getParameter("tel"))
 			.setBlog(request.getParameter("blog"))
 			.setDetailAddress(request.getParameter("detailAddr"))
-			.setTag(request.getParameter("tag"));
+			.setTag(request.getParameter("tag"))
+			.setLevel(Integer.parseInt(request.getParameter("level")));
 			
 			memberDao.change(memberUpdate);
 			HttpSession session = request.getSession();

@@ -49,7 +49,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
   </head>
-
+<jsp:include page="header.jsp"></jsp:include>
   <!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
   <!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
   <!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->

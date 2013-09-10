@@ -38,6 +38,7 @@ public class ProjectDao {
 				project.setStartDate(rs.getDate("START_DATE"));
 				project.setEndDate(rs.getDate("END_DATE"));
 				project.setTag(rs.getString("TAG"));
+				
 				return project;
 			}else{
 				return null;
@@ -69,7 +70,7 @@ public class ProjectDao {
 		try {
 			con = conPool.getConnection();
 			stmt = con.prepareStatement(
-				"select * from SPMS_MEMBS, SPMS_PRJMEMB, SPMS_PRJS where SPMS_MEMBS.EMAIL = SPMS_PRJMEMB.EMAIL and SPMS_PRJMEMB.PNO = SPMS_PRJS.PNO and SPMS_MEMBS.EMAIL = '"+ email + "';"); // ? -> in-parameter
+				"select t1.EMAIL, t1.MNAME, t1.PWD, t1.TEL, t1.BLOG, t2.LEVEL, t2.PNO, t3.TITLE, t3.CONTENT, t3.START_DATE, t3.END_DATE, t3.TAG from SPMS_MEMBS t1, SPMS_PRJMEMB t2, SPMS_PRJS t3 where t1.EMAIL = t2.EMAIL and t2.PNO = t3.PNO and t1.EMAIL = '" + email + "'"); // ? -> in-parameter
 			rs = stmt.executeQuery();
 			Project project = null;
 			ArrayList<Project> list = new ArrayList<Project>();
@@ -123,6 +124,7 @@ public class ProjectDao {
 				project.setStartDate(rs.getDate("START_DATE"));
 				project.setEndDate(rs.getDate("END_DATE"));
 				project.setTag(rs.getString("TAG"));
+				project.setLevel(rs.getInt("LEVEL"));
 				list.add(project);
 			} 
 			

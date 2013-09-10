@@ -3,6 +3,7 @@
 <%@ page language="java" 
 	contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="member" class="net.bitacademy.java41.vo.Member" 
 		scope="session"></jsp:useBean>   
 <jsp:useBean id="member_project" type="java.util.Collection<net.bitacademy.java41.vo.Project>" 
@@ -68,35 +69,7 @@
   <body class=""> 
   <!--<![endif]-->
     
-    <div class="navbar">
-        <div class="navbar-inner">
-                <ul class="nav pull-right">
-                    
-                 <!--    <li><a href="#" class="hidden-phone visible-tablet visible-desktop" role="button">Settings</a></li> -->
-                    <li id="fat-menu" class="dropdown">
-                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-user"></i> <% if(member.getName() == null) {out.println("로그인하세요!");}else{out.println(member.getName());}%>
-                            
-                            <i class="icon-caret-down"></i>
-                        </a>
-
-                        <ul class="dropdown-menu">
-                            <!-- <li><a tabindex="-1" href="#">My Account</a></li> -->
-                            <!-- <li class="divider"></li> -->
-                            <li><a tabindex="-1" class="visible-phone" href="#">Settings</a></li>
-                            <li class="divider visible-phone"></li>
-                            <li><a tabindex="-1" href="../auth/logout">Logout</a></li>
-                             
-                        </ul>
-                    </li>
-                    
-                </ul>
-                <a class="brand" href="../auth/main"><span class="first">JJL</span> <span class="second">Project</span></a>
-        </div>
-    </div>
-    
-
-
+<jsp:include page="header.jsp"></jsp:include>
     
 <jsp:include page="sidebar.jsp"></jsp:include>
     <div class="content">
@@ -137,9 +110,46 @@
             
             <h2>TAG </h2>
             <%= project_detail.getTag() %><br>
-            
+                        
         </div>
+    
+    
+    
     </div>
+    
+    <table>
+					<tr>
+					<th>이름</th>
+					<th>이메일</th>
+					<th>전화번호</th>
+					<th>블로그</th>
+					<th>권한</th>
+					</tr>
+					
+            <c:forEach var="member" items="${project_detail_members}">
+					<tr>
+					<td>${member.name}</td>
+					<td>${member.email}</td>
+					<td>${member.tel}</td>
+					<td>${member.blog}</td>
+					<c:choose>
+					<c:when test="${member.level == 0}">
+						<td>관리자</td>
+					</c:when>
+					<c:when test="${member.level == 1}">
+						<td>일반 멤버</td>
+					</c:when>
+					<c:otherwise>
+						<td>설정 안된 값</td>
+					</c:otherwise>
+					</c:choose>
+					</tr>
+					
+					
+			</c:forEach>
+			</table>
+    
+    
     
 </div>
 

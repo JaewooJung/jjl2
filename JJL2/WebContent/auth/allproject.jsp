@@ -71,35 +71,7 @@
   <body class=""> 
   <!--<![endif]-->
     
-<div class="navbar">
-        <div class="navbar-inner">
-                <ul class="nav pull-right">
-                    
-                 <!--    <li><a href="#" class="hidden-phone visible-tablet visible-desktop" role="button">Settings</a></li> -->
-                    <li id="fat-menu" class="dropdown">
-                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-user"></i> <% if(member.getName() == null) {out.println("로그인하세요!");}else{out.println(member.getName());}%>
-                            
-                            <i class="icon-caret-down"></i>
-                        </a>
-
-                        <ul class="dropdown-menu">
-                            <!-- <li><a tabindex="-1" href="#">My Account</a></li> -->
-                            <!-- <li class="divider"></li> -->
-                            <li><a tabindex="-1" class="visible-phone" href="#">Settings</a></li>
-                            <li class="divider visible-phone"></li>
-                            <li><a tabindex="-1" href="../auth/logout">Logout</a></li>
-                             
-                        </ul>
-                    </li>
-                    
-                </ul>
-                <a class="brand" href="../auth/main"><span class="first">JJL</span> <span class="second">Project</span></a>
-        </div>
-    </div>
-    
-
-
+<jsp:include page="header.jsp"></jsp:include>
 <jsp:include page="sidebar.jsp"></jsp:include>
     
     <div class="content">
