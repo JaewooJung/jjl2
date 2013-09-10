@@ -183,7 +183,7 @@ public class MemberDao {
 			stmt = con.createStatement();
 			
 			rs = stmt.executeQuery(
-					"select t1.LEVEL, t2.EMAIL, t2.MNAME, t2.PWD, t2.REG_DATE, t2.TAG, t2.TEL, t2.UPDATE_DATE from SPMS_PRJMEMB t1, SPMS_MEMBS t2 where t1.EMAIL = t2.EMAIL and t1.PNO = " + pno + " order by pno");
+					"select t1.LEVEL, t2.EMAIL, t2.BLOG, t2.DET_ADDR, t2.MNAME, t2.PWD, t2.REG_DATE, t2.TAG, t2.TEL, t2.UPDATE_DATE from SPMS_PRJMEMB t1, SPMS_MEMBS t2 where t1.EMAIL = t2.EMAIL and t1.PNO = " + pno + " order by pno");
 			ArrayList<Member> list = new ArrayList<Member>(); 
 			Member m = null;
 			while (rs.next()) {

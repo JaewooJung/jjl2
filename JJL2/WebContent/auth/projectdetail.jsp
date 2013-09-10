@@ -110,14 +110,10 @@
             
             <h2>TAG </h2>
             <%= project_detail.getTag() %><br>
-                        
-        </div>
-    
-    
-    
-    </div>
-    
-    <table>
+            
+            <br><br><h2> 멤버 목록</h2>
+            
+            <table class="table list">
 					<tr>
 					<th>이름</th>
 					<th>이메일</th>
@@ -148,10 +144,15 @@
 					
 			</c:forEach>
 			</table>
+                        
+        </div>
     
     
     
-</div>
+    </div>
+    </div>
+    </div>
+    
 
 
 
@@ -167,7 +168,7 @@
                     
             </div>
         </div>
-    </div>
+    
     
 
 

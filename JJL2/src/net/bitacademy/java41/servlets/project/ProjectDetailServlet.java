@@ -41,7 +41,7 @@ public class ProjectDetailServlet extends HttpServlet {
 			Project project = projectDao.getProject(Integer.parseInt(pno));
 			RequestDispatcher rd = request.getRequestDispatcher("projectdetail.jsp");
 			session.setAttribute("project_detail", project);
-			session.setAttribute("project_detail_members", memberDao.get(request.getParameter("pno")));
+			session.setAttribute("project_detail_members", memberDao.get(Integer.parseInt(request.getParameter("pno"))));
 			rd.forward(request, response);
 			
 		} catch (Exception e) {
