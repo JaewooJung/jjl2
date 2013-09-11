@@ -86,6 +86,11 @@
 <input type="text" name="detailAddr"><br>
 <label>태그</label>
 <input type="text" name="tag"><br>
+<label>회원레벨</label>
+<select name="level">
+<option value="0" selected>일반회원</option>
+<option value="9" >손님</option>
+</select><br>
 
 <input type="submit" class="btn btn-primary pull-right" value="회원가입">
 <input type="reset" class="btn btn-primary pull-right" value="취소">

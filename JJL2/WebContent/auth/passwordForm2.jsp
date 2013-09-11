@@ -8,9 +8,9 @@
     pageEncoding="UTF-8"%>
 <jsp:useBean id="member" class="net.bitacademy.java41.vo.Member" 
 		scope="session"></jsp:useBean>   
-<jsp:useBean id="project" type="java.util.Collection<net.bitacademy.java41.vo.Project>" 
-		scope="session"></jsp:useBean>  
 <jsp:useBean id="member_project" type="java.util.Collection<net.bitacademy.java41.vo.Project>" 
+		scope="session"></jsp:useBean>  
+<jsp:useBean id="memberUpdate" type="net.bitacademy.java41.vo.Member" 
 		scope="session"></jsp:useBean>  
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -72,17 +72,16 @@
   <!--<![endif]-->
     
 <jsp:include page="header.jsp"></jsp:include>
-<jsp:include page="sidebar.jsp"></jsp:include>
+ <jsp:include page="sidebar.jsp"></jsp:include>
     
     <div class="content">
         
         <div class="header">
             
-            <h1 class="page-title">프로젝트 관리</h1>
+            <h1 class="page-title">회원 정보 수정 </h1>
         </div>
-        <%if(member.getLevel() == 1){ %>
-        	<p align="right" style="pitch: medium;"><a href="<%=application.getContextPath()%>/auth/addproject" >프로젝트 추가</a></p>
-        <%}%>
+       
+        
             <!-- <li><a href="index.html">Home</a> <span class="divider">/</span></li> 
             <li class="active">Users</li>
         </ul>
@@ -98,51 +97,16 @@
   </div>
 </div>-->
 <div class="well">
-	<script language="javascript">
-function confirmDelete(id){
-var ans = confirm(id + "의 정보를 삭제 하시겠습니까?");
-if(ans == "1"){
-document.location = "../auth/projectdelete?pno="+ id;
-}
-}	
-</script>
+ <form action="passwordreset2" method="post">
+<label>기존 패스워드</label>
+<input type="password" name="password"><br>
+<label>새로운 패스워드</label>
+<input type="password" name="newPassword"><br>
+<label>새로운 패스워드 확인</label>
+<input type="password" name="newPassword2"><br>
+<input type="submit" class="btn btn-primary" value="암호 재설정"><br>
 
-    <table class="table" >
-      <thead >
-        <tr>
-          <th>Project No </th>
-          <th>Title </th>
-          <th>StartDate </th>
-          <th>EndDate </th>
-          <th>Tag  </th>
-          <th></th>
-          <th></th>
-          
-        </tr>
-      </thead>
-      
-      
-      <tbody>
-       
-       <% for(Project p : project){%>
-       <tr>
-          <td><%=p.getPno()%></td>
-          <td><a href="../auth/projectdetail?pno=<%=p.getPno()%>"><%=p.getTitle()%></td>
-          <td><%=p.getStartDate()%></td>
-          <td><%=p.getEndDate()%></td>
-          <td><%=p.getTag()%></td>
-          <%if(member.getLevel() == 1){ %>
-          <td><a href="../auth/projectupdate?pno=<%=p.getPno()%>"><i class="icon-pencil"></i></a></td>
-          <td><a href="javascript:confirmDelete(<%=p.getPno()%>);"><i class="icon-remove"></i></a></td>
-          <%}%>
-        </tr>
-       
-       <%} %>
-       </tbody>
-    </table>
-
-
-
+</form>
 </div>
 
 <!-- 

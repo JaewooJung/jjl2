@@ -5,8 +5,7 @@
     pageEncoding="UTF-8"%>
 <jsp:useBean id="member" class="net.bitacademy.java41.vo.Member" 
 		scope="session"></jsp:useBean>   
-<jsp:useBean id="member_project" type="java.util.Collection<net.bitacademy.java41.vo.Project>" 
-		scope="session"></jsp:useBean>  
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

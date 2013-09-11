@@ -18,10 +18,13 @@ import net.bitacademy.java41.vo.Member;
 @WebServlet("/auth/login")
 @SuppressWarnings("serial")
 public class LoginServlet extends HttpServlet {
+	
+	
 	@Override
 	protected void doGet(
 			HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.getSession().invalidate();
 		// 만약 쿠키 정보에 email의 값이 있다면, 기본적으로 그 값을 입력 상자에 출력한다.
 		Cookie[] cookies = request.getCookies();
 		String email = "";

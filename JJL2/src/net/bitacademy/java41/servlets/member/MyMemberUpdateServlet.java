@@ -32,6 +32,8 @@ public class MyMemberUpdateServlet extends HttpServlet {
 				(MemberDao) this.getServletContext().getAttribute("memberDao");
 		
 		try {
+			Member memberUpdate = (Member) request.getSession().getAttribute("member");
+			request.getSession().setAttribute("memberUpdate", memberUpdate);
 			HttpSession session = request.getSession();
 			RequestDispatcher rd = request.getRequestDispatcher("../auth/myupdatemember.jsp");
 			rd.forward(request, response);
@@ -56,6 +58,9 @@ public class MyMemberUpdateServlet extends HttpServlet {
 		MemberDao memberDao = 
 				(MemberDao) this.getServletContext().getAttribute("memberDao");
 		try {
+			Member member = (Member) request.getSession().getAttribute("memberUpdate");
+			if(request.getParameter("password").equals(member.getPassword())){
+			
 			Member memberUpdate = (Member) request.getSession().getAttribute("memberUpdate");
 			memberUpdate.setName(request.getParameter("name"))
 			.setPassword(memberUpdate.getEmail())
@@ -68,10 +73,15 @@ public class MyMemberUpdateServlet extends HttpServlet {
 			
 			memberDao.change(memberUpdate);
 			HttpSession session = request.getSession();
-			response.sendRedirect("../auth/allmember");
+			response.sendRedirect("../auth/mymemberupdate");
 			//RequestDispatcher rd = request.getRequestDispatcher("../auth/allmember");
 			//rd.forward(request, response);
-			
+			}else{
+				RequestDispatcher rd = 
+						request.getRequestDispatcher("/auth/update_error2.jsp");
+				rd.forward(request, response);
+				
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			RequestDispatcher rd = 

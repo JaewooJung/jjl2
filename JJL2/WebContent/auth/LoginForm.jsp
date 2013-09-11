@@ -87,13 +87,13 @@
 	placeholder="hong@test.com"><br>
                     <label>Password</label>
                     <input type="password" name="password" placeholder="password"><br>
-                    <input type = "submit"  value = "Login"class="btn btn-primary pull-right"></a>
+                    <a href="../auth/signin" class="btn btn-primary pull-right">Sign In</a>
+                    <input type = "submit"  value = "Login" class="btn btn-primary pull-right">
                     <label class="remember-me"><input type="checkbox" name="saveId"
 	<%= isSaveId ? "checked" : ""%>
 > Remember me</label>
-                    <div class="clearfix"></div>
-                </form>
-            </div>
+                 </form>
+             </div>
         </div>
         
     </div>

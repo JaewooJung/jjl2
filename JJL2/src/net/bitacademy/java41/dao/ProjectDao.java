@@ -140,7 +140,7 @@ public class ProjectDao {
 			}
 		}		
 	}
-	/*
+	
 	public int add(Project project) throws Exception {
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -148,17 +148,13 @@ public class ProjectDao {
 		try {
 			con = conPool.getConnection();
 			stmt = con.prepareStatement(
-				"insert into SPMS_MEMBS("
-				+ " EMAIL,MNAME,PWD,TEL,"
-				+ " BLOG,REG_DATE,UPDATE_DATE,DET_ADDR,TAG)"
-				+ " values(?,?,?,?,?,now(),now(),?,?)");
-			stmt.setString(1, project.getEmail());
-			stmt.setString(2, project.getName());
-			stmt.setString(3, project.getPassword());
-			stmt.setString(4, project.getTel());
-			stmt.setString(5, project.getBlog());
-			stmt.setString(6, project.getDetailAddress());
-			stmt.setString(7, project.getTag());
+				"insert into SPMS_PRJS(TITLE, CONTENT, START_DATE, END_DATE, TAG, LEVEL) values(?,?,?,?,?,?)");
+			stmt.setString(1, project.getTitle());
+			stmt.setString(2, project.getContent());
+			stmt.setDate(3, project.getStartDate());
+			stmt.setDate(4, project.getEndDate());
+			stmt.setString(5, project.getTag());
+			stmt.setInt(6, project.getLevel());
 			return stmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -247,22 +243,24 @@ public class ProjectDao {
 			}
 		}
 	}
-
+*/
 	public int change(Project project) throws Exception {
 		Connection con = null;
 		PreparedStatement stmt = null;
 		
 		try {
 			con = conPool.getConnection();
+			
 			stmt = con.prepareStatement(
-				"update MEMBERS set"
-				+ " MNAME=?,PHONE=?,BLOG=?,AGE=?,REG_DATE=now()"
-				+ " where EMAIL=?");
-			stmt.setString(1, project.getName());
-			stmt.setString(2, project.getPhone());
-			stmt.setString(3, project.getBlog());
-			stmt.setInt(4, project.getAge());
-			stmt.setString(5, project.getEmail());
+					"update SPMS_PRJS set TITLE=?, CONTENT=?, START_DATE=?, END_DATE=?, TAG=?, LEVEL=? where PNO = ?");
+				stmt.setString(1, project.getTitle());
+				stmt.setString(2, project.getContent());
+				stmt.setDate(3, project.getStartDate());
+				stmt.setDate(4, project.getEndDate());
+				stmt.setString(5, project.getTag());
+				stmt.setInt(6, project.getLevel());
+				stmt.setInt(7, project.getPno());
+			
 			return stmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -276,7 +274,7 @@ public class ProjectDao {
 		}
 	}
 
-	public int remove(String email) throws Exception {
+	public int remove(int pno) throws Exception {
 		Connection con = null;
 		Statement stmt = null;
 		
@@ -285,8 +283,8 @@ public class ProjectDao {
 			stmt = con.createStatement();
 			
 			return stmt.executeUpdate(
-				"delete from MEMBERS"
-				+ " where EMAIL='" + email + "'");
+				"delete from SPMS_PRJS"
+				+ " where PNO=" + pno);
 			
 		} catch (Exception e) {
 			throw e;
@@ -298,7 +296,7 @@ public class ProjectDao {
 			}
 		}
 	}
-*/
+
 
 	
 }

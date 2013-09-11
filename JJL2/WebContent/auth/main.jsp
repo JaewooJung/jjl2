@@ -3,10 +3,6 @@
 <%@ page language="java" 
 	contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean id="member" class="net.bitacademy.java41.vo.Member" 
-		scope="session"></jsp:useBean>   
-<jsp:useBean id="member_project" type="java.util.Collection<net.bitacademy.java41.vo.Project>" 
-		scope="session"></jsp:useBean>  
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -95,7 +91,7 @@
 
     <div class="alert alert-info">
         <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong><%=member.getName() %>님 안녕하세요!</strong> 좋은 하루 되시기 바랍니다!
+        <strong>${member.name}님 안녕하세요!</strong> 좋은 하루 되시기 바랍니다!
     </div>
 
     <div class="block">
@@ -105,7 +101,7 @@
             <div class="stat-widget-container">
                 <div class="stat-widget">
                     <div class="stat-button">
-                        <p class="title"><%=member_project.size() %></p>
+                        <p class="title">0</p>
                         <p class="detail">참여 프로젝트 수 </p>
                     </div>
                 </div>
@@ -148,16 +144,7 @@
                   <th>Tag</th>
                 </tr>
               </thead>
-              <tbody>
-                <% for(Project p : member_project){ %>
-                
-                <tr>
-                  <td><%=p.getTitle() %></td>
-                  <td><%=p.getStartDate() %></td>
-                  <td><%=p.getTag() %></td>
-                </tr>
-                
-               <%}%>
+             
               </tbody>
             </table>
             <p><a href="users.html">More...</a></p>

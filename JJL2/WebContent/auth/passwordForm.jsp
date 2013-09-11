@@ -10,8 +10,6 @@
 		scope="session"></jsp:useBean>   
 <jsp:useBean id="member_project" type="java.util.Collection<net.bitacademy.java41.vo.Project>" 
 		scope="session"></jsp:useBean>  
-<jsp:useBean id="allmember" type="java.util.List<net.bitacademy.java41.vo.Member>" 
-		scope="session"></jsp:useBean>  
 <jsp:useBean id="memberUpdate" type="net.bitacademy.java41.vo.Member" 
 		scope="session"></jsp:useBean>  
 

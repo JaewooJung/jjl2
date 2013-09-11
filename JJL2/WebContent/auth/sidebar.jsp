@@ -4,10 +4,10 @@
 	contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
 <jsp:useBean id="member" class="net.bitacademy.java41.vo.Member" 
 		scope="session"></jsp:useBean>   
-<jsp:useBean id="member_project" type="java.util.Collection<net.bitacademy.java41.vo.Project>" 
-		scope="session"></jsp:useBean>  
+
 
 
     <div class="sidebar-nav">
@@ -45,8 +45,8 @@
 
         <a href="#accounts-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>Account<!-- <span class="label label-info">+3</span> --></a>
         <ul id="accounts-menu" class="nav nav-list collapse">
-            <li ><a href="../auth/login">Sign In</a></li>
-            <li ><a href="../auth/signin">Sign Up</a></li>
+            <li ><a href="../auth/login">Log In Other</a></li>
+            <li ><a href="../auth/signin">Sign In</a></li>
             <!-- <li ><a href="reset-password.html">Reset Password</a></li> -->
         </ul>
 
@@ -58,19 +58,23 @@
             <li ><a href="503.html">503 page</a></li>
         </ul>
  -->
-        <a href="../auth/allproject" class="nav-header"><i class="icon-legal"></i>View All Projects</a>
+ 		<c:choose>
+	    <c:when test="${member.level != '1'}">
+        	<a href="../auth/allproject" class="nav-header"><i class="icon-legal"></i>View All Projects</a>
+        </c:when>
+        </c:choose>
         <c:choose>
 	        <c:when test="${member.level == '1'}">
 		        <a href="#legal-menu" class="nav-header" data-toggle="collapse"><i class="icon-user"></i>Manager</a>
-		        <ul id="legal-menu" class="nav nav-list collapse">
+		        <ul id="legal-menu" class="nav nav-list collapse in">
 		            
 		            <li ><a href="../auth/allmember">Member Control </a></li>
-		            <li ><a href="../auth/projectdetail">Project Control </a></li>
+		            <li ><a href="../auth/allproject">Project Control </a></li>
 		        </ul>
 		    </c:when>
 	    <c:otherwise>
-       	 	<a href="#legal-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>Project<span class="label label-info"><%=member_project.size() %></span></a>
-        		<ul id="legal-menu" class="nav nav-list collapse">
+       	 	<a href="#legal-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>Project<span class="label label-info">${fn:length(member_project)}</span></a>
+        		<ul id="legal-menu" class="nav nav-list collapse in">
             
             	<c:forEach var="project" items="${member_project}">
 					<li><a href="${rootPath}../auth/projectdetail?pno=${project.pno}">${project.title}
