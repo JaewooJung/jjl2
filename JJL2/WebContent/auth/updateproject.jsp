@@ -79,7 +79,7 @@
         
         <div class="header">
             
-            <h1 class="page-title">회원 추가 </h1>
+            <h1 class="page-title">프로젝트 변경 </h1>
         </div>
        
         
@@ -112,7 +112,6 @@
 <label>TAG</label>
 <input type="text" name="tag" value="${projectUpdate.tag}"><br>
 
-<input type="reset" class="btn btn-primary pull-right" value="취소">
 <input type="submit" class="btn btn-primary pull-right" value="프로젝트 변경">
 
 </form>

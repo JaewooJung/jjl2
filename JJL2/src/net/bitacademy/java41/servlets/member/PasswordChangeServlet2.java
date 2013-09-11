@@ -35,7 +35,7 @@ public class PasswordChangeServlet2 extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			Member member = (Member) request.getSession().getAttribute("memberUpdate");
 			String email = member.getEmail();
-			String oldPassword = request.getParameter("password");
+			String oldPassword = member.getPassword();
 			String newPassword = request.getParameter("newPassword");
 			String newPassword2 = request.getParameter("newPassword2");
 			
